@@ -1,0 +1,24 @@
+.main-container {
+  height: 100vh;
+  display: flex;
+  background-color: #e7ecf4;
+}
+
+.login-image {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-image img {
+  object-fit: cover;
+  height: auto;
+  width: 100%;
+}
+
+.children-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
