@@ -22,3 +22,17 @@
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 750px) {
+  .login-image {
+    display: none;
+  }
+
+  /* .main-container {
+    display: block;
+  } */
+
+  .children-container {
+    width: 100%;
+  }
+}
