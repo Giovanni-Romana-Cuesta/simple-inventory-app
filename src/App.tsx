@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
-import SignIn from './components/SignIn/SignIn';
+import SignIn from './components/SignUp/SignUp';
 
 function App() {
   return (
