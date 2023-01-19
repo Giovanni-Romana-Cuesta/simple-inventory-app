@@ -26,6 +26,7 @@ const SignUp = () => {
       return;
     }
     localStorage.setItem(StorageKeys.USER, JSON.stringify(newUser));
+    navigate('/login');
   };
 
   return (
