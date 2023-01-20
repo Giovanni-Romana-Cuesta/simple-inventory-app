@@ -31,7 +31,7 @@ const Home = () => {
     <div className='home-container'>
       <Header />
       {error && <span>{error}</span>}
-      {isMobile && <MobileList />}
+      {isMobile && <MobileList items={meters} />}
       {!isMobile && <DesktopList items={meters} />}
     </div>
   );

@@ -1,0 +1,39 @@
+.cards-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px #ccc;
+  color: #253b56;
+  margin: 12px 0px;
+  padding: 4px 16px 20px 16px;
+}
+
+.card p {
+  margin: 7px 0;
+}
+
+.actions-container {
+  margin-top: 10px;
+}
+
+.action-btn {
+  width: 70px;
+  text-align: center;
+  padding: 5px;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.edit-btn {
+  margin-right: 10px;
+  background-color: #3a54aa;
+}
+
+.delete-btn {
+  background-color: #cc0000;
+}
