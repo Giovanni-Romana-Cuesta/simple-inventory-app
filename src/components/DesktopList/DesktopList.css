@@ -1,0 +1,56 @@
+.table-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.meters-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.meters-table thead tr {
+  background-color: #c4c4c4;
+  color: #000;
+  text-align: left;
+}
+
+.meters-table th,
+.meters-table td {
+  padding: 10px 15px;
+}
+
+.meters-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  cursor: pointer;
+}
+
+.meters-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.meters-table tbody tr:last-of-type {
+  border-bottom: 2px solid #c4c4c4;
+}
+
+.action-btn {
+  width: 70px;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.edit-btn {
+  margin-right: 10px;
+  background-color: #3a54aa;
+}
+
+.delete-btn {
+  background-color: #cc0000;
+}

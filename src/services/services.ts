@@ -13,14 +13,14 @@ const handleError = (error: unknown) => {
   }
 };
 
-export const getMeters = async () => {
+export const getMeters = async (page: number) => {
   try {
-    const { data, status } = await axios.get<GetMetersResponse>(BASE_URL, {
+    const { data } = await axios.get<GetMetersResponse>(BASE_URL, {
       headers: { Accept: 'application/json' },
-      params: { page: 0, size: 20 },
+      params: { page, size: 20 },
     });
 
-    return { data, status };
+    return data;
   } catch (error) {
     handleError(error);
   }

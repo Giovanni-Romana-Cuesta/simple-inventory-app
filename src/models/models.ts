@@ -52,15 +52,13 @@ export enum OwnerOption {
 }
 
 export type GetMetersResponse = {
-  data: {
-    items: MeterModel[];
-    page: number;
-    size: number;
-    total: number;
-    pages: number;
-    next_page: number | null;
-    previous_page: number | null;
-  };
+  items: MeterModel[];
+  page: number;
+  size: number;
+  total: number;
+  pages: number;
+  next_page: number | null;
+  previous_page: number | null;
 };
 
 export type GetMeterResponse = {
