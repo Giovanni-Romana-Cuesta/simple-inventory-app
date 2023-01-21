@@ -46,6 +46,7 @@
   border: none;
   color: #fff;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .edit-btn {

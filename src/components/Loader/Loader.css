@@ -1,0 +1,30 @@
+.container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 110px;
+  height: 110px;
+  border: 15px solid #f3f3f3;
+  border-top: 15px solid #3a54aa;
+  border-radius: 50%;
+  animation: spinner 0.7s linear infinite;
+}
+
+.text {
+  text-align: center;
+  margin-top: 8px;
+  font-size: large;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

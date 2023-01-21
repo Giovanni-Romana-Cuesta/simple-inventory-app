@@ -9,6 +9,7 @@ import { MeterModel } from '../../models/models';
 import CreateMeter from '../CreateMeter/CreateMeter';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../SearchBar/SearchBar';
+import Loader from '../Loader/Loader';
 
 const Home = () => {
   const [meters, setMeters] = useState<MeterModel[]>();
@@ -20,22 +21,30 @@ const Home = () => {
   const [previousPage, setPreviousPage] = useState<boolean>(false);
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { isMobile } = useWindowDimensions();
 
   const _getMeters = useCallback(
     async (page = 0) => {
-      const response = await getMeters(page);
-      if (!response) {
+      setIsLoading(true);
+      try {
+        const response = await getMeters(page);
+        if (!response) {
+          setError('Something went wrong');
+          return;
+        }
+        setSearchText('');
+        setMeters(response.items);
+        setTotalPages(response.pages);
+        setPage(response.page);
+        setNextPage(response.next_page !== null);
+        setPreviousPage(response.previous_page !== null);
+      } catch (error) {
         setError('Something went wrong');
-        return;
+      } finally {
+        setIsLoading(false);
       }
-      setSearchText('');
-      setMeters(response.items);
-      setTotalPages(response.pages);
-      setPage(response.page);
-      setNextPage(response.next_page !== null);
-      setPreviousPage(response.previous_page !== null);
     },
     [page],
   );
@@ -64,31 +73,38 @@ const Home = () => {
         searchText={searchText}
         showAddModal={() => setShowAddModal(true)}
       />
-      {error && <span>{error}</span>}
-      {isMobile && (
-        <MobileList
-          items={searchText.length > 1 ? filteredMeters : meters}
-          getMeters={_getMeters}
-        />
+
+      {isLoading && <Loader />}
+
+      {!isLoading && (
+        <>
+          {error && <span>{error}</span>}
+          {isMobile && (
+            <MobileList
+              items={searchText.length > 1 ? filteredMeters : meters}
+              getMeters={_getMeters}
+            />
+          )}
+          {!isMobile && (
+            <DesktopList
+              items={searchText.length > 1 ? filteredMeters : meters}
+              getMeters={_getMeters}
+            />
+          )}
+          <CreateMeter
+            show={showAddModal}
+            close={() => setShowAddModal(false)}
+            getMeters={_getMeters}
+          />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            getMeters={_getMeters}
+            nextPage={nextPage}
+            previousPage={previousPage}
+          />
+        </>
       )}
-      {!isMobile && (
-        <DesktopList
-          items={searchText.length > 1 ? filteredMeters : meters}
-          getMeters={_getMeters}
-        />
-      )}
-      <CreateMeter
-        show={showAddModal}
-        close={() => setShowAddModal(false)}
-        getMeters={_getMeters}
-      />
-      <Pagination
-        totalPages={totalPages}
-        currentPage={page}
-        getMeters={_getMeters}
-        nextPage={nextPage}
-        previousPage={previousPage}
-      />
     </div>
   );
 };

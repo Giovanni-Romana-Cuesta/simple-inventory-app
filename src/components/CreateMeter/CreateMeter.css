@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .content {
@@ -19,6 +20,11 @@
   padding: 30px 35px;
   overflow-y: auto;
   height: 500px;
+}
+
+.content[data-loading='true'] {
+  align-items: center;
+  justify-content: center;
 }
 
 .content h1 {
@@ -85,4 +91,10 @@
 .error {
   color: #cc0000;
   font-size: large;
+}
+
+@media (max-width: 750px) {
+  .content {
+    width: calc(100% - 120px);
+  }
 }
