@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './EditMeter.css';
 import {
   ConditionOption,
   ConnectionTypeOption,
@@ -8,20 +7,18 @@ import {
   StorageSystemOption,
 } from '../../models/models';
 import { updateMeter } from '../../services/services';
-import { useNavigate } from 'react-router-dom';
+import './EditMeter.css';
 
 export interface CreateMeterProps {
   show: boolean;
   close: () => void;
   meterItem: MeterModel;
-  getMeters: () => Promise<void>
+  getMeters: () => Promise<void>;
 }
 
 const EditMeter = ({ show, close, meterItem, getMeters }: CreateMeterProps) => {
   const [meter, setMeter] = useState<Partial<MeterModel>>(meterItem);
   const [error, setError] = useState<string | undefined>(undefined);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     setMeter(meterItem);
@@ -43,8 +40,8 @@ const EditMeter = ({ show, close, meterItem, getMeters }: CreateMeterProps) => {
     if (!meter.id) return;
     try {
       await updateMeter(meter.id, meter);
-      close()
-      navigate('/');
+      close();
+      getMeters();
     } catch (error) {
       setError('Something went wrong, try againn');
     }
@@ -61,7 +58,7 @@ const EditMeter = ({ show, close, meterItem, getMeters }: CreateMeterProps) => {
             <div className='close'>
               <i className='fas fa-times' onClick={onClose}></i>
             </div>
-            <h2>Create Meter</h2>
+            <h2>Edit Meter</h2>
             <form className='form'>
               <label>Id</label>
               <input type='text' value={meter.id} disabled />
