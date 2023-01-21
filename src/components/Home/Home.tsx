@@ -8,6 +8,7 @@ import './Home.css';
 import { MeterModel } from '../../models/models';
 import CreateMeter from '../CreateMeter/CreateMeter';
 import Pagination from '../Pagination/Pagination';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Home = () => {
   const [meters, setMeters] = useState<MeterModel[]>();
@@ -29,6 +30,7 @@ const Home = () => {
         setError('Something went wrong');
         return;
       }
+      setSearchText('');
       setMeters(response.items);
       setTotalPages(response.pages);
       setPage(response.page);
@@ -57,15 +59,11 @@ const Home = () => {
   return (
     <div className='home-container'>
       <Header />
-      <div className='home-actions'>
-        <div className='search-input'>
-          <i className='fa-solid fa-search'></i>
-          <input type='text' placeholder='Search' onChange={handleSearch} />
-        </div>
-        <button onClick={() => setShowAddModal(true)}>
-          <i className='fas fa-plus'></i>Add Meter
-        </button>
-      </div>
+      <SearchBar
+        handleSearch={handleSearch}
+        searchText={searchText}
+        showAddModal={() => setShowAddModal(true)}
+      />
       {error && <span>{error}</span>}
       {isMobile && (
         <MobileList
