@@ -2,12 +2,12 @@
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
+  padding-top: 0;
 }
 
 .card {
   border-radius: 8px;
   box-shadow: 0px 0px 8px #ccc;
-  color: #253b56;
   margin: 12px 0px;
   padding: 4px 16px 20px 16px;
 }

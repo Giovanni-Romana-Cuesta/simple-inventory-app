@@ -3,3 +3,48 @@
   height: 100vh;
   overflow-x: hidden;
 }
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.home-actions button {
+  width: 170px;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #5cb85c;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home-actions button i {
+  margin-right: 5px;
+}
+
+.search-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 3px;
+  padding-left: 20px;
+  border-radius: 10px;
+  height: 30px;
+  border: 1px solid #3a54aa;
+}
+
+.search-input input {
+  border: none;
+  width: 100%;
+  outline: none;
+}
+
+.search-input i {
+  color: #3a54aa;
+  margin-right: 10px;
+}
