@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import { MeterModel } from '../../models/models';
 import './DesktopList.css';
 import EditMeter from '../EditModel/EditMeter';
+import DeleteMeter from '../DeleteMeter/DeleteMeter';
 
 export interface DesktopListProps {
   items: MeterModel[] | undefined;
+  getMeters: () => Promise<void>;
 }
 
-const DesktopList = ({ items }: DesktopListProps) => {
+const DesktopList = ({ items, getMeters }: DesktopListProps) => {
   const [selectedItem, setSelectedItem] = useState<MeterModel>();
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+  const [idToDelete, setIdToDelete] = useState<number>();
 
   const openEdit = (item: MeterModel) => {
     setSelectedItem(item);
     setOpenModal(true);
+  };
+
+  const openDelete = (id: number) => {
+    setIdToDelete(id);
+    setOpenDeleteModal(true);
   };
 
   return (
@@ -45,7 +54,9 @@ const DesktopList = ({ items }: DesktopListProps) => {
                     <button className='edit-btn action-btn' onClick={() => openEdit(item)}>
                       Edit
                     </button>
-                    <button className='delete-btn action-btn'>Delete</button>
+                    <button className='delete-btn action-btn' onClick={() => openDelete(item.id)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -54,7 +65,20 @@ const DesktopList = ({ items }: DesktopListProps) => {
         )}
       </div>
       {selectedItem && (
-        <EditMeter show={openModal} close={() => setOpenModal(false)} meterItem={selectedItem} />
+        <EditMeter
+          show={openModal}
+          close={() => setOpenModal(false)}
+          meterItem={selectedItem}
+          getMeters={getMeters}
+        />
+      )}
+      {idToDelete && (
+        <DeleteMeter
+          meterID={idToDelete}
+          show={openDeleteModal}
+          close={() => setOpenDeleteModal(false)}
+          getMeters={getMeters}
+        />
       )}
     </>
   );

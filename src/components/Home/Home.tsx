@@ -42,9 +42,13 @@ const Home = () => {
         </button>
       </div>
       {error && <span>{error}</span>}
-      {isMobile && <MobileList items={meters} />}
-      {!isMobile && <DesktopList items={meters} />}
-      <CreateMeter show={showAddModal} close={() => setShowAddModal(false)} />
+      {isMobile && <MobileList items={meters} getMeters={_getMeters} />}
+      {!isMobile && <DesktopList items={meters} getMeters={_getMeters} />}
+      <CreateMeter
+        show={showAddModal}
+        close={() => setShowAddModal(false)}
+        getMeters={_getMeters}
+      />
     </div>
   );
 };

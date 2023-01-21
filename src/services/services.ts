@@ -58,7 +58,7 @@ export const updateMeter = async (id: number, meter: Partial<MeterModel>) => {
   return data;
 };
 
-export const deleteMeter = async (id: string) => {
+export const deleteMeter = async (id: number) => {
   const { data } = await axios.delete<GetMeterResponse>(`${BASE_URL}/${id}`, {
     headers: { Accept: 'application/json' },
   });

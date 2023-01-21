@@ -14,9 +14,10 @@ export interface CreateMeterProps {
   show: boolean;
   close: () => void;
   meterItem: MeterModel;
+  getMeters: () => Promise<void>
 }
 
-const EditMeter = ({ show, close, meterItem }: CreateMeterProps) => {
+const EditMeter = ({ show, close, meterItem, getMeters }: CreateMeterProps) => {
   const [meter, setMeter] = useState<Partial<MeterModel>>(meterItem);
   const [error, setError] = useState<string | undefined>(undefined);
 

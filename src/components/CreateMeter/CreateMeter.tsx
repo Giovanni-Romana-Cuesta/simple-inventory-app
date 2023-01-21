@@ -8,18 +8,16 @@ import {
   StorageSystemOption,
 } from '../../models/models';
 import { createMeter } from '../../services/services';
-import { useNavigate } from 'react-router-dom';
 
 export interface CreateMeterProps {
   show: boolean;
   close: () => void;
+  getMeters: () => Promise<void>
 }
 
-const CreateMeter = ({ show, close }: CreateMeterProps) => {
+const CreateMeter = ({ show, close, getMeters }: CreateMeterProps) => {
   const [meter, setMeter] = useState<Partial<MeterModel>>({});
   const [error, setError] = useState<string | undefined>(undefined);
-
-  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const numericFields = ['i_n', 'seals', 'i_max'];
@@ -37,7 +35,7 @@ const CreateMeter = ({ show, close }: CreateMeterProps) => {
     try {
       await createMeter(meter);
       close();
-      navigate('/');
+      getMeters()
     } catch (error) {
       setError('Something went wrong, try againn');
     }
@@ -57,8 +55,6 @@ const CreateMeter = ({ show, close }: CreateMeterProps) => {
             </div>
             <h2>Create Meter</h2>
             <form className='form'>
-              <label>Id</label>
-              <input type='text' value={meter.id} disabled />
               <label>Serial</label>
               <input type='text' name='serial' value={meter.serial} onChange={handleChange} />
               <label>Connection Type</label>
