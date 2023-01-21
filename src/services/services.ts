@@ -15,7 +15,7 @@ export const getMeters = async (page: number) => {
   try {
     const { data } = await axios.get<GetMetersResponse>(BASE_URL, {
       headers: { Accept: 'application/json' },
-      params: { page, size: 3 },
+      params: { page, size: 20 },
     });
 
     return data;

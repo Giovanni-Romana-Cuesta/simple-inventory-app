@@ -31,7 +31,7 @@ const Home = () => {
       setTotalPages(response.pages);
       setPage(response.page);
       setNextPage(response.next_page !== null);
-      setPreviousPage(response.next_page !== null);
+      setPreviousPage(response.previous_page !== null);
     },
     [page],
   );

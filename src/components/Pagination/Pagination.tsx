@@ -1,4 +1,3 @@
-import React from 'react';
 import './Pagination.css';
 
 export interface PaginationProps {
@@ -27,6 +26,7 @@ const Pagination = ({
       getMeters(currentPage - 1);
     }
   };
+
   return (
     <div className='pagination-container'>
       <div>
