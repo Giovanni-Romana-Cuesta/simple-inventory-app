@@ -15,9 +15,10 @@ export interface CreateMeterProps {
   close: () => void;
   meterItem: MeterModel;
   getMeters: () => Promise<void>;
+  notify: () => void;
 }
 
-const EditMeter = ({ show, close, meterItem, getMeters }: CreateMeterProps) => {
+const EditMeter = ({ show, close, meterItem, getMeters, notify }: CreateMeterProps) => {
   const [meter, setMeter] = useState<Partial<MeterModel>>(meterItem);
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -45,6 +46,7 @@ const EditMeter = ({ show, close, meterItem, getMeters }: CreateMeterProps) => {
       await updateMeter(meter.id, meter);
       close();
       getMeters();
+      notify();
     } catch (error) {
       setError('Something went wrong, try againn');
     } finally {

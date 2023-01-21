@@ -7,9 +7,10 @@ import DeleteMeter from '../DeleteMeter/DeleteMeter';
 export interface MobileListProps {
   items: MeterModel[] | undefined;
   getMeters: () => Promise<void>;
+  notify: () => void;
 }
 
-const MobileList = ({ items, getMeters }: MobileListProps) => {
+const MobileList = ({ items, getMeters, notify }: MobileListProps) => {
   const [selectedItem, setSelectedItem] = useState<MeterModel>();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -64,6 +65,7 @@ const MobileList = ({ items, getMeters }: MobileListProps) => {
           close={() => setOpenModal(false)}
           meterItem={selectedItem}
           getMeters={getMeters}
+          notify={notify}
         />
       )}
       {idToDelete && (
@@ -72,6 +74,7 @@ const MobileList = ({ items, getMeters }: MobileListProps) => {
           show={openDeleteModal}
           close={() => setOpenDeleteModal(false)}
           getMeters={getMeters}
+          notify={notify}
         />
       )}
     </>

@@ -10,6 +10,8 @@ import CreateMeter from '../CreateMeter/CreateMeter';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../SearchBar/SearchBar';
 import Loader from '../Loader/Loader';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const [meters, setMeters] = useState<MeterModel[]>();
@@ -61,51 +63,74 @@ const Home = () => {
     }
   };
 
+  const notify = () => {
+    toast.success('Action complete successfully');
+  };
+
   useEffect(() => {
     _getMeters();
   }, [getMeters]);
 
   return (
-    <div className='home-container'>
-      <Header />
-      <SearchBar
-        handleSearch={handleSearch}
-        searchText={searchText}
-        showAddModal={() => setShowAddModal(true)}
+    <>
+      <div className='home-container'>
+        <Header />
+        <SearchBar
+          handleSearch={handleSearch}
+          searchText={searchText}
+          showAddModal={() => setShowAddModal(true)}
+        />
+
+        {isLoading && <Loader />}
+
+        {!isLoading && (
+          <>
+            {error && <span>{error}</span>}
+            {isMobile && (
+              <MobileList
+                items={searchText.length > 1 ? filteredMeters : meters}
+                getMeters={_getMeters}
+                notify={notify}
+              />
+            )}
+            {!isMobile && (
+              <DesktopList
+                items={searchText.length > 1 ? filteredMeters : meters}
+                getMeters={_getMeters}
+                notify={notify}
+              />
+            )}
+            <CreateMeter
+              show={showAddModal}
+              close={() => setShowAddModal(false)}
+              getMeters={_getMeters}
+              notify={notify}
+            />
+            <Pagination
+              totalPages={totalPages}
+              currentPage={page}
+              getMeters={_getMeters}
+              nextPage={nextPage}
+              previousPage={previousPage}
+            />
+          </>
+        )}
+      </div>
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
       />
-
-      {isLoading && <Loader />}
-
-      {!isLoading && (
-        <>
-          {error && <span>{error}</span>}
-          {isMobile && (
-            <MobileList
-              items={searchText.length > 1 ? filteredMeters : meters}
-              getMeters={_getMeters}
-            />
-          )}
-          {!isMobile && (
-            <DesktopList
-              items={searchText.length > 1 ? filteredMeters : meters}
-              getMeters={_getMeters}
-            />
-          )}
-          <CreateMeter
-            show={showAddModal}
-            close={() => setShowAddModal(false)}
-            getMeters={_getMeters}
-          />
-          <Pagination
-            totalPages={totalPages}
-            currentPage={page}
-            getMeters={_getMeters}
-            nextPage={nextPage}
-            previousPage={previousPage}
-          />
-        </>
-      )}
-    </div>
+      {/* Same as */}
+      <ToastContainer />
+    </>
   );
 };
 

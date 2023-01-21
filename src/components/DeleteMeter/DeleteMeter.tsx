@@ -8,9 +8,10 @@ export interface DeleteMeterProps {
   close: () => void;
   meterID: number;
   getMeters: () => Promise<void>;
+  notify: () => void;
 }
 
-const DeleteMeter = ({ close, show, meterID, getMeters }: DeleteMeterProps) => {
+const DeleteMeter = ({ close, show, meterID, getMeters, notify }: DeleteMeterProps) => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -20,6 +21,7 @@ const DeleteMeter = ({ close, show, meterID, getMeters }: DeleteMeterProps) => {
       await deleteMeter(meterID);
       close();
       getMeters();
+      notify();
     } catch (error) {
       setError('Something went wrong, try againn');
     } finally {

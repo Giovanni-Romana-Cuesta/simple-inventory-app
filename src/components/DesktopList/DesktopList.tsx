@@ -7,9 +7,10 @@ import DeleteMeter from '../DeleteMeter/DeleteMeter';
 export interface DesktopListProps {
   items: MeterModel[] | undefined;
   getMeters: () => Promise<void>;
+  notify: () => void;
 }
 
-const DesktopList = ({ items, getMeters }: DesktopListProps) => {
+const DesktopList = ({ items, getMeters, notify }: DesktopListProps) => {
   const [selectedItem, setSelectedItem] = useState<MeterModel>();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
@@ -70,6 +71,7 @@ const DesktopList = ({ items, getMeters }: DesktopListProps) => {
           close={() => setOpenModal(false)}
           meterItem={selectedItem}
           getMeters={getMeters}
+          notify={notify}
         />
       )}
       {idToDelete && (
@@ -78,6 +80,7 @@ const DesktopList = ({ items, getMeters }: DesktopListProps) => {
           show={openDeleteModal}
           close={() => setOpenDeleteModal(false)}
           getMeters={getMeters}
+          notify={notify}
         />
       )}
     </>
